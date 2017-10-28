@@ -6,6 +6,11 @@
 
 <h2>@ViewBag.Title</h2>
 
+    <p>
+        @Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-primary" })
+    </p>
+
+
 @if (!Model.Any())
 {
     <p>No customers to list.</p>
@@ -24,7 +29,7 @@ else
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(c.Name,"Edit","Customers",new { id = c.Id } ,null)
+                        @Html.ActionLink(c.Name, "Edit", "Customers", new { id = c.Id }, null)
                     </td>
                     <td>
                         @c.MembershipType.Name
