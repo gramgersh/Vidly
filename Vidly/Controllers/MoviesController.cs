@@ -70,6 +70,7 @@ namespace Vidly.Controllers
         {
             if (movie.Id == 0)
             {
+                movie.DateAdded = DateTime.Now;
                 _context.Movies.Add(movie);
             }
             else
@@ -77,11 +78,11 @@ namespace Vidly.Controllers
                 var curMovie = _context.Movies.Single(m => m.Id == movie.Id);
                 curMovie.Name = movie.Name;
                 curMovie.ReleaseDate = movie.ReleaseDate;
-                curMovie.DateAdded = movie.DateAdded;
                 curMovie.GenreID = movie.GenreID;
                 curMovie.NumberInStock = movie.NumberInStock;
             }
             _context.SaveChanges();
+
             return RedirectToAction("Index", "Movies");
         }
 

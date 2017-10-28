@@ -24,9 +24,9 @@ namespace Vidly.Models
         [Display(Name = "Number in Stock")]
         public int NumberInStock { get; set; }
 
-        // The Genre is required.  The EF takes care of setting GenreID to not-nullable.
-        [Required]
         public Genre Genre { get; set; }
+
+        [Required]
         public byte GenreID { get; set; }
     }
 }
