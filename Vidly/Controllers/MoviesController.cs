@@ -10,6 +10,16 @@ namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
+
+        public IEnumerable<Movie> GetMovies()
+        {
+            return new List<Movie>
+            {
+                new Movie { Id = 1, Name = "Shrek!" },
+                new Movie { Id = 2, Name = "Brazil" }
+            };
+        }
+
         // GET: Movies
         [Route("Movies/Index")]
         public ActionResult Index(int? pageIndex, string sortBy)
@@ -23,7 +33,8 @@ namespace Vidly.Controllers
             {
                 sortBy = "Name";
             }
-            return Content(String.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
+            var movies = GetMovies();
+            return View(movies);
         }
 
         [Route("Movies/Edit")]

@@ -1,33 +1,32 @@
-﻿@model IEnumerable<Vidly.Models.Movie>
-
+﻿@model IEnumerable<Vidly.Models.Customer>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Movies</h2>
+<h2>@ViewBag.Title</h2>
+
 @if (!Model.Any())
 {
-    <p>There are no movies yet.</p>
+    <p>No customers to list.</p>
 }
 else
 {
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>Movie</th>
+                <th>Customer</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var m in Model)
+            @foreach (var c in Model)
             {
                 <tr>
                     <td>
-                        @m.Name
+                        @Html.ActionLink(c.Name,"Details","Customers",new { id = c.Id } ,null)
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 }
-
