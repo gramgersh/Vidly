@@ -9,26 +9,32 @@ namespace Vidly.Controllers
 {
     public class CustomersController : Controller
     {
-        public IEnumerable<Customer> GetCustomers()
+        // This is the database context for making queries.
+        private ApplicationDbContext _context;
+
+        public CustomersController()
         {
-            return new List<Customer>
-            {
-                new Customer { Id = 1, Name = "Jon Smith" },
-                new Customer { Id = 2, Name = "Mary Williams" }
-            };
+            _context = new ApplicationDbContext();
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+            base.Dispose(disposing);
+        }
+
+        // 
         // GET: Customers
         public ActionResult Index()
         {
-            var customers = GetCustomers();
+            var customers = _context.Customers.ToList();
             return View(customers);
         }
 
         [Route("Customers/Details/{id:int}")]
         public ActionResult Details(int id)
         {
-            var customer = GetCustomers().SingleOrDefault(c => c.Id == id);
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
             if ( customer == null )
             {
                 return HttpNotFound();
