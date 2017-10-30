@@ -10,6 +10,7 @@ namespace Vidly.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         [Required]
@@ -18,6 +19,7 @@ namespace Vidly.Models
 
         [Required]
         [Display(Name = "Date Added")]
+        [Range(1,20)]
         public DateTime DateAdded { get; set; }
 
         [Required]
