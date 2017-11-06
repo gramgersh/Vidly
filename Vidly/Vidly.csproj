@@ -269,6 +269,10 @@
     <Compile Include="Migrations\201710301238588_MakeMoviesNameBeRequired.Designer.cs">
       <DependentUpon>201710301238588_MakeMoviesNameBeRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711061451349_PopulateInitialRoles.cs" />
+    <Compile Include="Migrations\201711061451349_PopulateInitialRoles.Designer.cs">
+      <DependentUpon>201711061451349_PopulateInitialRoles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -581,6 +585,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710301238588_MakeMoviesNameBeRequired.resx">
       <DependentUpon>201710301238588_MakeMoviesNameBeRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061451349_PopulateInitialRoles.resx">
+      <DependentUpon>201711061451349_PopulateInitialRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
