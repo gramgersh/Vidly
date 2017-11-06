@@ -1,4 +1,5 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -28,20 +29,18 @@ namespace Vidly.Controllers
         // GET: Movies
         public ActionResult Index(int? pageIndex, string sortBy)
         {
-            if (!pageIndex.HasValue)
+            if ( User.IsInRole(RoleName.CanManageMovies))
             {
-                pageIndex = 1;
+                return View("List");
             }
-
-            if (String.IsNullOrWhiteSpace(sortBy))
+            else
             {
-                sortBy = "Name";
+                return View("ReadOnlyList");
             }
-            var movies = _context.Movies.Include(m => m.Genre).ToList();
-            return View(movies);
         }
 
         [Route("Movies/Edit")]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.Include(m => m.Genre).Single(m => m.Id == id);
@@ -53,6 +52,7 @@ namespace Vidly.Controllers
         }
 
         [Route("Movies/New")]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var viewModel = new MovieFormViewModel
@@ -65,6 +65,7 @@ namespace Vidly.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Save(Movie movie)
         {
             if ( !ModelState.IsValid)
@@ -92,6 +93,7 @@ namespace Vidly.Controllers
 
             return RedirectToAction("Index", "Movies");
         }
+
 
         [Route("Movies/Released/{year:regex(\\d{4})}/{month:int:range(1,12)}")]
         public ActionResult ByReleaseYear(int year, int month)
