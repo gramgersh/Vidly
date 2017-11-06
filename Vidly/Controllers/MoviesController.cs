@@ -39,7 +39,7 @@ namespace Vidly.Controllers
             }
         }
 
-        [Route("Movies/Edit")]
+        [Route("Movies/Edit/{id}")]
         [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
