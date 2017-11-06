@@ -152,7 +152,8 @@ namespace Vidly.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {
+                var user = new ApplicationUser
+                {
                     UserName = model.Email,
                     Email = model.Email,
                     DrivingLicense = model.DrivingLicense
@@ -165,13 +166,13 @@ namespace Vidly.Controllers
                     // Registration.
                     // We will then grab the data from the tables and use it to populate via a migration so that
                     // the Production and Dev systems will have these in common with the same ID.
-//                    if (false)
-//                    {
-//                        ApplicationDbContext _context = new ApplicationDbContext();
-//                        var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_context));
-//                        await roleManager.CreateAsync(new IdentityRole("CanManageMovies"));
-//                        await UserManager.AddToRoleAsync(user.Id, "CanManageMovies");
-//                    }
+                    //                    if (false)
+                    //                    {
+                    //                        ApplicationDbContext _context = new ApplicationDbContext();
+                    //                        var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_context));
+                    //                        await roleManager.CreateAsync(new IdentityRole("CanManageMovies"));
+                    //                        await UserManager.AddToRoleAsync(user.Id, "CanManageMovies");
+                    //                    }
 
                     // END TEMP CODE
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -386,7 +387,7 @@ namespace Vidly.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, DrivingLicense = model.DrivingLicense };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
