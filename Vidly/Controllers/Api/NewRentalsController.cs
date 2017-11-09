@@ -29,11 +29,19 @@ namespace Vidly.Controllers.Api
         {
             var customer = _context.Customers.Single(c => c.Id == newRental.CustomerID);
 
-            var movies = _context.Movies.Where(m => newRental.MovieIds.Contains(m.Id));
+            var movies = _context.Movies.Where(m => newRental.MovieIds.Contains(m.Id))
+                .Distinct()
+                .ToList();
 
             // Foreach movie in the request list, add it to the Rentals table
             foreach (var movie in movies)
             {
+                if ( movie.NumberAvailable == 0)
+                {
+                    return BadRequest(movie.Name + ": Movie is not available.");
+                }
+                movie.NumberAvailable--;
+
                 var rental = new Rental
                 {
                     Customer = customer,
