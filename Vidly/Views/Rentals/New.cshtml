@@ -81,7 +81,7 @@
                     vm.movieIds.push(movie.id);
                 });
 
-            $('#idRental').submit(function (e) {
+            $('#newRental').submit(function (e) {
                 e.preventDefault();
 
                 $.ajax({
@@ -90,10 +90,10 @@
                     data: vm
                 })
                     .done(function () {
-
+                        toastr.success("Rentals recorded");
                     })
                     .fail(function () {
-
+                        toastr.error("Something unexpected happened.");
                     })
                     ;
             });
